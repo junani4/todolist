@@ -1,0 +1,48 @@
+.Todo__header {
+    display: inline-block;
+    height: 54px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .title {
+        width: 110px;
+        height: 100%;
+        color: #87cefa;
+        font-family: 'establishRoomNo703OTF';
+        font-size: 25px;
+        margin-top: 7px;
+        margin-left: 10px;
+    }
+
+    .time {
+        width: 60px;    
+        height: 100%;
+        color: #000;
+        float: right;
+
+
+        .Year{
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        .Month{
+            font-size: 14px;
+            margin-right: 7px;
+            font-family: 'establishRoomNo703OTF';
+        }
+
+        .Day{
+            font-size: 16px;
+            font-weight: 500;
+        }
+    }
+}
+
+@font-face {
+    font-family: 'establishRoomNo703OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/establishRoomNo703OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
