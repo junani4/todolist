@@ -1,24 +1,71 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useCallback, useRef } from 'react';
+import { createGlobalStyle } from 'styled-components';
+import TodoTemplate from './components/TodoTemplate';
+import TodoAddList from './components/TodoAddList';
+import TodoList from './components/TodoList';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background:	#f5f5dc;
+  }
+`;
 
 function App() {
+  const [todos, setTodos] = useState([
+    {
+      id: 1,
+      text: 'React 공부',
+      checked: true
+    },
+    {
+      id: 2,
+      text: '친구랑 영화보기',
+      checked: false
+    },
+    {
+      id: 3,
+      text: '운동하기',
+      checked: false
+    }
+  ]);
+
+  const nextId = useRef(4);
+
+  const onInsert = useCallback(
+    (text) => {
+      const todo = {
+        id: nextId.current,
+        text,
+        checked: false
+      };
+      setTodos((todos) => todos.concat(todo));
+      nextId.current += 1;
+    }, []);
+
+  const onRemove = useCallback(
+    (id) => {
+      setTodos((todos) => todos.filter((todo) => todo.id !== id));
+    }, []);
+
+  const onToggle = useCallback(
+    (id) => {
+      setTodos((todos) => 
+        todos.map((todo) => 
+          (todo.id === id ? { ...todo, checked: !todo.checked } : todo)));
+    }, []);
+
+  const onTop = useCallback(
+    
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <TodoTemplate>
+        <TodoAddList onInsert={onInsert} />
+        <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} onTop={onTop} />
+      </TodoTemplate>
+    </>
   );
 }
 
